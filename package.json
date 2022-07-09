@@ -1,6 +1,6 @@
 {
   "name": "protonmail-for-linux",
-  "version": "1.0.0",
+  "version": "1.0.0-beta1",
   "description": "An unofficial ProtonMail client for GNU/Linux",
   "main": "main.js",
   "scripts": {
