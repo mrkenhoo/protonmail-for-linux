@@ -1,5 +1,5 @@
 pkgname=protonmail-for-linux
-pkgver=1.0.0
+pkgver=1.0.0_beta1
 pkgrel=1
 pkgdesc="An unofficial ProtonMail client for GNU/Linux"
 url="https://github.com/mrkenhoo/${pkgname}"
@@ -8,7 +8,8 @@ arch=('x86_64')
 makedepends=('npm')
 source=("git+https://github.com/mrkenhoo/${pkgname}.git"
         protonmail-for-linux.desktop)
-sha256sums=('SKIP')
+sha256sums=('SKIP'
+            'SKIP')
 options=(!strip)
 
 build()
@@ -26,7 +27,7 @@ package()
     for f in ${srcdir}/${pkgname}/out/protonmail-for-linux-linux-x64/*
     do
         install -Dm 644 ${f} ${pkgdir}/opt/${pkgname}
-    done-
+    done
 
     install -Dm 644 "${srcdir}/${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
 }
