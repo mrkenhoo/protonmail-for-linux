@@ -21,13 +21,13 @@ build()
 
 package()
 {
-    [ ! -d "${pkgdir}/opt" ] && mkdir -pv ${pkgdir}/opt/${pkgname}
-    [ ! -d "${pkgdir}/usr/bin/" ] && mkdir -pv ${pkgdir}/usr/bin
+    [ ! -d "${pkgdir}/opt" ] && mkdir -pv "${pkgdir}/opt/${pkgname}"
+    [ ! -d "${pkgdir}/usr/bin/" ] && mkdir -pv "${pkgdir}/usr/bin"
+    [ ! -d "${pkgdir}/usr/share/applications" ] && mkdir -pv "${pkgdir}/usr/share/applications"
 
-    for f in ${srcdir}/${pkgname}/out/protonmail-for-linux-linux-x64/*
-    do
-        install -Dm 644 ${f} ${pkgdir}/opt/${pkgname}
-    done
+    find ${srcdir}/${pkgname}/out/protonmail-for-linux-linux-x64 -type d -exec install -v -d -Dm 755 {} "${pkgdir}/opt/${pkgname}" \;
+    find ${srcdir}/${pkgname}/out/protonmail-for-linux-linux-x64 -type f -exec install -v -Dm 644 {} "${pkgdir}/opt/${pkgname}" \;
 
-    install -Dm 644 "${srcdir}/${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+    install -Dm 644 -v "${srcdir}/${pkgname}/${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
 }
+
