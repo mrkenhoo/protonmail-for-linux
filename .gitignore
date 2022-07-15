@@ -3,3 +3,4 @@ pkg/
 protonmail-for-linux
 node_modules
 *.pkg.tar.zst
+out/
