@@ -1,6 +1,6 @@
 pkgname=protonmail-for-linux
 pkgver=1.0.0_beta1
-pkgrel=1
+pkgrel=2
 pkgdesc="An unofficial ProtonMail client for GNU/Linux"
 url="https://github.com/mrkenhoo/${pkgname}"
 license=('GPL')
@@ -16,6 +16,7 @@ build()
 {
     cd ${srcdir}/${pkgname}
     npm install
+    npm update
     npm run package
 }
 
@@ -25,9 +26,11 @@ package()
     [ ! -d "${pkgdir}/usr/bin/" ] && mkdir -pv "${pkgdir}/usr/bin"
     [ ! -d "${pkgdir}/usr/share/applications" ] && mkdir -pv "${pkgdir}/usr/share/applications"
 
-    find ${srcdir}/${pkgname}/out/protonmail-for-linux-linux-x64 -type d -exec install -v -d -Dm 755 {} "${pkgdir}/opt/${pkgname}" \;
-    find ${srcdir}/${pkgname}/out/protonmail-for-linux-linux-x64 -type f -exec install -v -Dm 644 {} "${pkgdir}/opt/${pkgname}" \;
+    find ${srcdir}/${pkgname}/out/${pkgname}-linux-x64 -type d -exec install -v -d -Dm 755 {} "${pkgdir}/opt/${pkgname}" \;
+    find ${srcdir}/${pkgname}/out/${pkgname}-linux-x64 -type f -exec install -v -Dm 644 {} "${pkgdir}/opt/${pkgname}" \;
 
     install -Dm 644 -v "${srcdir}/${pkgname}/${pkgname}.desktop" "${pkgdir}/usr/share/applications/${pkgname}.desktop"
+
+    ln -sv "/opt/${pkgname}/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
 }
 
